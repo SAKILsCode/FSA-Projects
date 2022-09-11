@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Common Meta Tags -->
+    <%- include('./common_sections/meta_tags.ejs') %>
+    <title>All Polls</title>
+
+    <!-- Bootstrap CSS -->
+    <%- include('./common_sections/bootstrap_css.ejs') %>
+    
+    <!-- Some extra css -->
+    <style>
+      a {
+        text-decoration: none;
+      }
+      .view-polls {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="col-md-6 offset-md-3 my-5">
+        <%- include('./common_sections/nav.ejs') %>
+        <div class="card card-body my-4">
+          <h5>All Polls</h5>
+          <ul class="list-group">
+            <% for (let poll of polls) { %>
+            <li class="list-group-item">
+              <a href="/polls/<%= poll._id %> "><%= poll.title %> </a>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <%- include('./common_sections/bootstrap_js.ejs') %>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Common Meta Tags -->
+    <%- include('./common_sections/meta_tags.ejs') %>
+    <title><%= poll.title %></title>
+
+    <!-- Bootstrap CSS -->
+    <%- include('./common_sections/bootstrap_css.ejs') %>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="col-md-6 offset-md-3 my-5">
+        <%- include('./common_sections/nav.ejs') %>
+        <div class="card card-body my-4">
+          <h4>Title: <%= poll.title %></h4>
+          <p>Description: <%= poll.description %></p>
+
+          <div class="my-3">
+            <h5 class="d-inline">Result:</h5>
+            <h6 class="badge bg-light text-dark">
+              Total Vote: <%= poll.totalVote %>
+            </h6>
+            <ul class="list-groupp mt-3">
+              <% for (let r of result) { %>
+              <li class="list-group-item my-2">
+                <h5>
+                  <strong class="mx-2"> <%= r.name %> </strong>
+
+                  <span class="badge bg-warning text-dark">
+                    <%= r.percentage.toFixed(2) %> %
+                  </span>
+                </h5>
+              </li>
+              <% } %>
+            </ul>
+          </div>
+
+          <div class="my-4">
+            <h5>Select Your Opinion</h5>
+            <form action="/polls/<%= poll._id %>" method="POST">
+              <% for (let option of poll.options) { %>
+              <div class="custom-control custom-radio">
+                <input
+                  type="radio"
+                  name="option"
+                  id="<%= option._id %> "
+                  class="custom-control-input"
+                  value="<%= option._id %> "
+                />
+                <label for="<%= option.name %> " class="custom-control-label"
+                  ><%= option.name %>
+                </label>
+              </div>
+              <% } %>
+              <input
+                type="submit"
+                value="Submit Opinion"
+                class="btn btn-primary mt-2"
+                id="submit-btn"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <%- include('./common_sections/bootstrap_js.ejs') %>
+  </body>
+</html>
